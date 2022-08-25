@@ -17,11 +17,19 @@ namespace MetaChat
     {
         public string serverPort;
         public string gamePort;
+        public string tcpPort;
         public MyServer server;
+        public MyTcp tcp;
         public MyRTC rtc;
         DeviceAudioTrackSource audioTrackSource = null;
         public void Start()
         {
+            tcp = new MyTcp
+            {
+                app = this,
+                port = tcpPort
+            };
+            tcp.Start();
             server = new MyServer
             {
                 app = this,
